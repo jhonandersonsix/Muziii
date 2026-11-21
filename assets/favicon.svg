@@ -1,13 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <defs>
-    <linearGradient id="s" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#FF3D8B"/><stop offset=".55" stop-color="#FF8A3D"/><stop offset="1" stop-color="#FFD23F"/>
-    </linearGradient>
-  </defs>
-  <circle cx="34" cy="34" r="28" fill="#000" opacity=".55"/>
-  <circle cx="30" cy="30" r="28" fill="url(#s)"/>
-  <rect x="16" y="28" width="6" height="14" rx="3" fill="#0D0B1A"/>
-  <rect x="24.5" y="18" width="6" height="24" rx="3" fill="#0D0B1A"/>
-  <rect x="33" y="23" width="6" height="19" rx="3" fill="#0D0B1A"/>
-  <rect x="41.5" y="15" width="6" height="27" rx="3" fill="#0D0B1A"/>
+  <rect width="64" height="64" rx="16" fill="#0D0B1A"/>
+  <g fill="#2B3075" transform="translate(3 3)">
+    <rect x="9" y="30" width="13" height="24" rx="4"/><circle cx="15.5" cy="20" r="6.5"/>
+    <rect x="25.5" y="22" width="13" height="32" rx="4"/><circle cx="32" cy="11" r="6.5"/>
+    <rect x="42" y="34" width="13" height="20" rx="4"/><circle cx="48.5" cy="24" r="6.5"/>
+  </g>
+  <rect x="9" y="30" width="13" height="24" rx="4" fill="#FFD23F"/><circle cx="15.5" cy="20" r="6.5" fill="#FFD23F"/>
+  <rect x="25.5" y="22" width="13" height="32" rx="4" fill="#EE3F8E"/><circle cx="32" cy="11" r="6.5" fill="#EE3F8E"/>
+  <rect x="42" y="34" width="13" height="20" rx="4" fill="#FFFFFF"/><circle cx="48.5" cy="24" r="6.5" fill="#FFFFFF"/>
 </svg>

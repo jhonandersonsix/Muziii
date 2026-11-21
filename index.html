@@ -18,6 +18,7 @@
 <link rel="stylesheet" href="css/layout.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="css/muzi.css">
+<link rel="stylesheet" href="css/logo.css">
 <link rel="stylesheet" href="css/live.css">
 <link rel="stylesheet" href="css/responsive.css">
 <script type="module" src="js/main.js"></script>
@@ -26,8 +27,7 @@
 <!-- Intro animada -->
 <div class="splash" id="splash" aria-hidden="true">
   <div class="splash-in">
-    <span class="mz-mark xl"><i></i><i></i><i></i><i></i></span>
-    <p class="splash-word"><span>M</span><span>u</span><span>z</span><span>i</span></p>
+    <span class="splash-logo" data-logo data-logo-intro data-logo-quiet></span>
     <p class="splash-sub">Tú pones la música. Muzi la mezcla.</p>
   </div>
 </div>
@@ -41,7 +41,7 @@
   <!-- ============ SIDEBAR ============ -->
   <aside class="side">
     <div class="box">
-      <a class="logo" href="./" aria-label="Muzi, inicio"><span class="mz-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mz-word">Muzi<small>La playlist de tu clase</small></span></a>
+      <a class="logo" href="./" aria-label="Muziii, volver al inicio"><span data-logo></span><small>La playlist de tu clase</small></a>
       <nav class="menu" id="menu" aria-label="Secciones">
         <span class="pill" id="menuPill"></span>
         <button class="on" type="button" data-go="top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg>Inicio</button>
@@ -175,7 +175,7 @@
   </footer>
   <div class="proj-ov" id="projOv" aria-hidden="true">
     <div class="bgimg" id="pjBg"></div><div class="shade"></div><div class="pulse"></div>
-    <div class="logo"><span class="mz-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mz-word big">Muzi</span></div>
+    <div class="logo"><span data-logo data-logo-quiet></span></div>
     <button class="iconbtn x" id="projX" type="button" aria-label="Salir del modo proyector"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
     <div class="info">
       <p class="lbl">Ahora suena en Muzi</p>

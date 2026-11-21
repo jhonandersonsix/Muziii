@@ -5,6 +5,7 @@ import { $, esc, thumb, storage, REDUCED_MOTION } from './core/utils.js';
 import { REACTIONS, WHO_KEY } from './core/config.js';
 import { connect, isLive } from './services/transport.js';
 import { parseLinks } from './services/parser.js';
+import { mountLogos } from './ui/logo.js';
 
 let T = null, code = null, name = storage.get(WHO_KEY, '') || '', st = null;
 const pending = new Map();      // mid -> timeout (pedidos esperando respuesta del profe)
@@ -233,3 +234,6 @@ async function start() {
 }
 
 start();
+
+// Logo vivo: las "i" bailan cuando el profe tiene música sonando; tocarlo lanza confeti.
+mountLogos({ isPlaying: () => document.body.classList.contains('playing'), onBurst: (n, x, y) => burstAt(x, y, Math.min(n, 18)) });

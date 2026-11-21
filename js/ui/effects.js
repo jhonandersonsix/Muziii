@@ -126,6 +126,6 @@ export function splash() {
   const s = $('splash');
   const hide = () => { s.classList.add('out'); document.body.classList.remove('booting'); setTimeout(() => s.remove(), 700); };
   if (REDUCED_MOTION) { s.remove(); document.body.classList.remove('booting'); return; }
-  setTimeout(hide, 1500);
+  setTimeout(hide, 2300);
   s.addEventListener('click', hide, { once: true });
 }

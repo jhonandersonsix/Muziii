@@ -26,3 +26,23 @@ Arreglos de la auditoría (15 errores):
 13. Mientras se lee una playlist aparece un aviso con indicador de carga.
 14. Botones de al menos 40 px en pantallas táctiles.
 15. Quitar una canción o vaciar la cola tiene "Deshacer" durante 5 s.
+
+## Versión 4 · Logo "MuZiii" vivo
+
+- Nuevo logo **MuZiii** (M y Z menta, u amarilla, tres "i" rosa, amarilla y azul, borde blanco tipo sticker y sombra 3D). Está dibujado en código (SVG), así que se ve nítido en cualquier tamaño y no depende de fuentes.
+- Aparece en: la intro, el menú lateral, el modo proyector y la pantalla del alumno (sala.html). También cambió el ícono de la pestaña (las tres "i").
+- Animación e interacción (`js/ui/logo.js` + `css/logo.css`):
+  - **Intro:** las letras caen una tras otra con rebote.
+  - **Las tres "i" son un ecualizador:** bailan al ritmo cuando hay música y respiran suave en pausa.
+  - **Sombra 3D que sigue al mouse** (en celular, a la inclinación del teléfono). El logo se gira un poco hacia donde está el cursor.
+  - **Pasar el mouse por una letra** la hace saltar. **Tocar una letra** suena como un xilófono (cada letra es una nota).
+  - **Clic en el logo:** ola de saltos y confeti. En el menú ya no recarga la página (antes cortaba la música): vuelve arriba.
+  - Respeta "reducir movimiento" del sistema y se detiene cuando no está a la vista (no gasta batería).
+- La intro dura 2,3 s (antes 1,5 s) para que se vea la caída del logo. Un toque la salta.
+
+## Versión 6 · Logo MUZiii definitivo (solo el logo; la interfaz no cambia)
+
+- Logo nuevo según la propuesta V1: M y Z turquesa, U blanca, tres "i" amarilla, rosa y blanca, con sombra 3D azul marino.
+- Mantiene toda la animación de la versión 4: caída en la intro, "i" que bailan como ecualizador con la música, sombra 3D que sigue al mouse (o la inclinación del celular), letras que saltan y suenan al tocarlas, y ola + confeti al hacer clic.
+- Ícono de la pestaña con las tres "i" en los nuevos colores.
+- El resto de la interfaz (colores, tipografías, paneles) queda igual que antes.

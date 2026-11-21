@@ -21,7 +21,13 @@ import { initAdd } from './ui/add.js';
 import { initNav } from './ui/nav.js';
 import { initAmbient, splash, toast } from './ui/effects.js';
 import { initLive } from './ui/live.js';
+import { mountLogos } from './ui/logo.js';
+import { burst } from './ui/effects.js';
 
+// Logo vivo: las "i" bailan cuando suena la música; tocarlo lanza confeti.
+mountLogos({ isPlaying: () => !document.body.classList.contains('paused'), onBurst: burst });
+// El logo del menú ya no recarga la página (cortaría la música): vuelve arriba.
+document.querySelector('.side .logo')?.addEventListener('click', e => { e.preventDefault(); document.querySelector('[data-go="top"]')?.click(); });
 splash();
 restore();
 const received = importFromHash();

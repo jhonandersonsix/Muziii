@@ -1,0 +1,21 @@
+/* Muzi · logo "MuZiii" vivo (lo dibuja y anima js/ui/logo.js) */
+.mzl{display:inline-block;line-height:0;cursor:pointer;user-select:none;-webkit-user-select:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.mzl-svg{display:block;height:100%;width:auto;overflow:visible;will-change:transform;transform-origin:50% 60%}
+.mzl-ink{fill:var(--mzl-ink,#2B3075)}
+.mzl-g{transition:filter .25s}
+.mzl:hover .mzl-g:hover{filter:brightness(1.12) saturate(1.1)}
+.mzl:focus-visible{outline:3px solid var(--volt,#FFD23F);outline-offset:6px;border-radius:12px}
+
+/* Menú lateral */
+.side .logo{flex-direction:column;align-items:flex-start;gap:8px;padding:6px 4px 4px}
+.side .logo .mzl{height:76px}
+.side .logo small{display:block;font-size:11px;font-weight:600;letter-spacing:0;color:var(--mute);font-family:var(--pjs)}
+
+/* Intro */
+.splash-logo{height:clamp(130px,26vw,300px)}
+
+/* Modo proyector */
+.proj-ov .logo .mzl{height:clamp(60px,9vh,110px)}
+
+/* Sala del alumno */
+.top .top-logo{height:40px;margin:4px 6px 4px 2px}
