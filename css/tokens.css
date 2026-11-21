@@ -1,0 +1,48 @@
+/* Muzi · tokens de marca: colores, tipografía, formas y medidas.
+   Identidad propia de Muzi (ver docs/Muzi_Manual_de_Marca.pdf). */
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+:root{
+  /* Superficies — "noche de concierto": negro con tinte violeta */
+  --bg:#0D0B1A;
+  --card:#17142B;
+  --card2:#1F1B38;
+  --line:rgba(255,255,255,.10);
+  --line2:rgba(255,255,255,.20);
+
+  /* Texto */
+  --fg:#FFF8F0;          /* crema: más cálido que el blanco puro */
+  --z3:#E4DDF2;
+  --mute:#A69FC2;
+  --dim:#605A80;
+
+  /* Paleta Muzi */
+  --pop:#FF3D8B;         /* Rosa Pop — acción principal */
+  --volt:#FFD23F;        /* Amarillo Volt — energía, votos */
+  --sky:#4D7CFF;         /* Azul Eléctrico — información */
+  --lila:#A78BFA;        /* Lila — calma, segundo plano */
+  --mint:#3DF2B0;        /* Menta — "en vivo", éxito */
+  --tang:#FF8A3D;        /* Mandarina — transición pop → volt */
+
+  /* Alias que usan los componentes (c1…c7 recorren la paleta) */
+  --s1:var(--mint); --s2:var(--sky); --s3:var(--lila); --s4:var(--lila); --s5:var(--pop); --s6:var(--tang); --s7:var(--volt);
+
+  /* Degradados de marca */
+  --grad-sunset:linear-gradient(100deg,var(--pop),var(--tang) 55%,var(--volt));
+  --grad-night:linear-gradient(100deg,var(--sky),var(--lila));
+  --spec-h:linear-gradient(90deg,var(--sky),var(--lila),var(--pop),var(--tang),var(--volt));
+  --spec-c:conic-gradient(from var(--ang),var(--pop),var(--tang),var(--volt),var(--mint),var(--sky),var(--lila),var(--pop));
+  --mk:var(--grad-sunset);
+  --hue:#FF3D8B;
+
+  /* Tipografía: Unbounded (títulos), DM Sans (texto), Space Mono (datos) */
+  --font-display:"Unbounded","Arial Rounded MT Bold",system-ui,sans-serif;
+  --pjs:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --jbm:"Space Mono",ui-monospace,Menlo,monospace;
+
+  /* Formas: Muzi es redondo y "sticker" */
+  --r-sm:12px; --r-md:20px; --r-lg:28px; --r-pill:999px;
+  --sticker:4px 4px 0 rgba(0,0,0,.55);
+
+  --bar:92px;
+  --ease-pop:cubic-bezier(.3,1.4,.5,1);
+}

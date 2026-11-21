@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Muzi · Sala en vivo</title>
+<meta name="description" content="Pide tu canción, vota y reacciona en la playlist de tu clase.">
+<meta name="theme-color" content="#0D0B1A">
+<meta name="color-scheme" content="dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/sala.css">
+<script type="module" src="js/sala.js"></script>
+</head>
+<body>
+<div class="glow" aria-hidden="true"><i></i><i></i></div>
+
+<header class="top">
+  <span class="mz-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <b class="word">Muzi</b>
+  <span class="code" id="code" hidden></span>
+  <span class="people" id="people" hidden><i class="dot"></i><span id="peopleN">0</span></span>
+</header>
+
+<!-- 1 · entrar -->
+<section class="screen join" id="join" hidden>
+  <p class="kicker">// sala en vivo</p>
+  <h1 id="joinTitle">Entra a la sala</h1>
+  <p class="sub">Pide tu canción, vota la que quieres que suene y reacciona en vivo.</p>
+  <form id="joinForm" class="stack">
+    <label class="field" id="codeField"><input id="codeIn" maxlength="4" autocomplete="off" autocapitalize="characters" placeholder="Código (4 letras)" aria-label="Código de la sala"></label>
+    <label class="field"><input id="nameIn" maxlength="30" autocomplete="nickname" placeholder="Tu nombre" aria-label="Tu nombre" required></label>
+    <button class="btn" type="submit">Entrar 🎧</button>
+  </form>
+  <p class="note" id="joinNote"></p>
+</section>
+
+<!-- 2 · sala -->
+<main class="screen live" id="live" hidden>
+  <section class="np" id="np">
+    <div class="art" id="art"><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div></div>
+    <div class="np-tx">
+      <p class="kicker" id="npK">// ahora suena</p>
+      <h2 id="npT">Muzi está en silencio</h2>
+      <p class="by" id="npB">El profe todavía no da play</p>
+      <div class="bar"><i id="npBar"></i></div>
+    </div>
+  </section>
+
+  <section class="card add">
+    <p class="kicker">// pide tu canción</p>
+    <form id="addForm" class="row">
+      <label class="field grow"><input id="url" type="text" inputmode="url" autocomplete="off" placeholder="Pega el link de YouTube" aria-label="Link de YouTube"></label>
+      <button class="btn" type="submit" id="addBtn">Pedir</button>
+    </form>
+    <p class="hint" id="hint">En YouTube toca <b>Compartir → Copiar enlace</b> y pégalo aquí.</p>
+  </section>
+
+  <section class="queue">
+    <div class="qhead"><p class="kicker">// sigue en la cola</p><span class="qmode" id="qmode"></span></div>
+    <div class="list" id="list"></div>
+    <p class="empty" id="empty" hidden>La cola está vacía. ¡Pide la primera! 🎶</p>
+  </section>
+</main>
+
+<!-- 3 · sala cerrada -->
+<section class="screen closed" id="closed" hidden>
+  <p class="kicker">// sala</p>
+  <h1>Esta sala está cerrada</h1>
+  <p class="sub" id="closedTx">Pídele al profe el código nuevo o escanea otra vez el QR.</p>
+  <button class="btn ghost" type="button" id="otherCode">Usar otro código</button>
+</section>
+
+<nav class="reactbar" id="reactbar" hidden aria-label="Reacciones"></nav>
+<div class="fx" id="fx" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" hidden></div>
+<p class="foot">Muzi · la playlist de tu clase</p>
+<noscript><p style="padding:24px">Muzi necesita JavaScript.</p></noscript>
+</body>
+</html>

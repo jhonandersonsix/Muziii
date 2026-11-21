@@ -1,0 +1,21 @@
+/* Muzi · motion: animaciones y atmósfera (niebla, grano, luz de cursor) */
+@keyframes ang{to{--ang:360deg}}
+@keyframes shift{to{background-position:200% 0}}
+@keyframes fogA{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(6vw,5vh) scale(1.15)}}
+@keyframes fogB{0%,100%{transform:translate(0,0) scale(1.1)}50%{transform:translate(-8vw,-4vh) scale(.92)}}
+@keyframes eq{0%,100%{transform:scaleY(.25)}50%{transform:scaleY(1)}}
+@keyframes marq{0%,15%{transform:translateX(0)}85%,100%{transform:translateX(var(--mx,0))}}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+@keyframes ping{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.4);opacity:0}}
+@keyframes toast{0%{opacity:0;transform:translate(-50%,20px)}10%,85%{opacity:1;transform:translate(-50%,0)}100%{opacity:0;transform:translate(-50%,-10px)}}
+@keyframes spinS{to{transform:rotate(360deg)}}
+
+/* ---------- atmósfera ---------- */
+.fog{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.fog i{position:absolute;border-radius:50%;filter:blur(70px)}
+.fog i:nth-child(1){width:48vw;height:48vw;left:52%;top:-14%;background:radial-gradient(closest-side,color-mix(in srgb,var(--hue) 45%,transparent),transparent);animation:fogA 18s ease-in-out infinite;transition:background 1.2s}
+.fog i:nth-child(2){width:46vw;height:46vw;left:-10%;top:50%;background:radial-gradient(closest-side,rgba(91,91,247,.28),transparent);animation:fogB 22s ease-in-out infinite}
+.noise{position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.cur-light{position:fixed;width:520px;height:520px;border-radius:50%;pointer-events:none;z-index:1;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(155,92,246,.09),transparent);transition:opacity .4s}
+

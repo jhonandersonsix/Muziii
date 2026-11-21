@@ -1,0 +1,14 @@
+{
+  "name": "Muzi · La playlist de tu clase",
+  "short_name": "Muzi",
+  "description": "Pega links de YouTube y la playlist suena sola, mezclada como un DJ.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0D0B1A",
+  "theme_color": "#0D0B1A",
+  "lang": "es",
+  "icons": [
+    { "src": "assets/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

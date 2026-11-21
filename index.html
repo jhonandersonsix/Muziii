@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Muzi · La playlist de tu clase</title>
+<meta name="description" content="Muzi: pega links de YouTube y la playlist de la clase suena sola, mezclada como un DJ.">
+<meta name="theme-color" content="#0D0B1A">
+<meta name="color-scheme" content="dark">
+<meta property="og:title" content="Muzi · La playlist de tu clase">
+<meta property="og:description" content="Tú pones la música. Muzi la mezcla.">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/motion.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/muzi.css">
+<link rel="stylesheet" href="css/live.css">
+<link rel="stylesheet" href="css/responsive.css">
+<script type="module" src="js/main.js"></script>
+</head>
+<body>
+<!-- Intro animada -->
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash-in">
+    <span class="mz-mark xl"><i></i><i></i><i></i><i></i></span>
+    <p class="splash-word"><span>M</span><span>u</span><span>z</span><span>i</span></p>
+    <p class="splash-sub">Tú pones la música. Muzi la mezcla.</p>
+  </div>
+</div>
+
+<div class="fog" aria-hidden="true"><i></i><i></i></div>
+<div class="cur-light" id="curLight" aria-hidden="true"></div>
+<div class="noise" aria-hidden="true"></div>
+<canvas id="fx" aria-hidden="true"></canvas>
+
+<div class="app" id="app">
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="side">
+    <div class="box">
+      <a class="logo" href="./" aria-label="Muzi, inicio"><span class="mz-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mz-word">Muzi<small>La playlist de tu clase</small></span></a>
+      <nav class="menu" id="menu" aria-label="Secciones">
+        <span class="pill" id="menuPill"></span>
+        <button class="on" type="button" data-go="top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l9-7 9 7v9a1 1 0 01-1 1h-5v-6H9v6H4a1 1 0 01-1-1z"/></svg>Inicio</button>
+        <button type="button" data-go="add"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8 12h8"/></svg>Agregar canción</button>
+        <button type="button" data-go="list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16M4 12h10M4 18h7"/><circle cx="18" cy="17" r="3"/><path d="M21 17V9"/></svg>La cola</button>
+      </nav>
+    </div>
+    <div class="box grow">
+      <p class="lbl">Tu sesión</p>
+      <div class="stats">
+        <div class="stat" style="--c:var(--s1)"><b id="stN">0</b><span>temas</span></div>
+        <div class="stat" style="--c:var(--s4)"><b id="stP">0</b><span>personas</span></div>
+        <div class="stat" style="--c:var(--s5)"><b id="stL">0</b><span>me gusta</span></div>
+        <div class="stat" style="--c:var(--s7)"><b id="stD">0</b><span>ya sonaron</span></div>
+      </div>
+      <p class="lbl" style="margin-top:8px">Cómo funciona</p>
+      <p class="howto"><i>1</i>Pega el link de YouTube de tu canción.</p>
+      <p class="howto"><i>2</i>Escribe tu nombre para que sepan quién la puso.</p>
+      <p class="howto"><i>3</i>Muzi la mezcla sola con la anterior.</p>
+      <span class="sp"></span>
+<p class="credit">Muzi · creado por <a href="https://jhonandersonsix.github.io/jhonweb/" target="_blank" rel="noopener">Jhon Pariona</a></p>
+      <button class="btn-matte w100 mag" type="button" id="btnShare">Copiar link de la lista</button>
+      <button class="btn-matte w100 mag" type="button" id="btnClear">Vaciar la cola</button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="box main" id="main">
+    <header class="hero" id="top">
+      <div class="cover" id="cover"><div class="ph"><span>mz</span></div></div>
+      <div class="txt">
+        <p class="lbl">playlist de la clase</p>
+        <h1>La playlist la ponen <span class="t-spec">ustedes.</span></h1>
+        <p class="sub">Pega tu canción de YouTube. Suena sola y se mezcla con la anterior como un DJ.</p>
+        <p class="meta"><b>Muzi</b><span class="d"></span><span id="mN">0 temas</span><span class="d"></span><span id="mT">mezcla 8 s</span><span class="live"><span class="d" id="liveDot"></span><span id="liveTx">en pausa</span></span><span class="roomchip" id="roomChip" hidden>📡 Sala <b id="roomChipCode">----</b> · <span id="roomChipN">0</span></span></p>
+      </div>
+    </header>
+
+    <div class="actions">
+      <button class="bigplay mag" id="bigPlay" type="button" aria-label="Reproducir"><svg viewBox="0 0 24 24" id="bigIco"><path d="M8 5v14l11-7z"/></svg></button>
+      <button class="iconbtn" id="shufA" type="button" aria-label="Aleatorio" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+      <button class="iconbtn" id="mixA" type="button" aria-label="Mezclar ya a la siguiente" title="Mezclar ya"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></button>
+      <label class="search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="Buscar en la cola" aria-label="Buscar en la cola"></label>
+    </div>
+
+    <section class="add" id="add">
+      <p class="lbl">Agregar canción</p>
+      <form class="row" id="addForm">
+        <label class="field"><svg width="18" height="18" viewBox="0 0 24 24" fill="#FF0033"><path d="M23 7.2a3 3 0 00-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 001 7.2 31 31 0 00.6 12a31 31 0 00.4 4.8 3 3 0 002.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 002.1-2.1c.3-1.6.4-3.2.4-4.8s-.1-3.2-.4-4.8z"/><path d="M9.8 15.3l5.8-3.3-5.8-3.3z" fill="#fff"/></svg><input id="url" type="text" inputmode="url" placeholder="Pega aquí el link de YouTube" aria-label="Link de YouTube" autocomplete="off"></label>
+        <label class="field who"><input id="who" type="text" maxlength="30" placeholder="Tu nombre" aria-label="Tu nombre" autocomplete="nickname"></label>
+        <button class="btn-spec mag" type="submit">Agregar a la cola →</button>
+      </form>
+      <p class="hint"><i></i>Funciona con youtube.com, youtu.be, Shorts, YouTube Music y playlists.</p>
+    </section>
+
+    <div class="filters" role="group" aria-label="Filtrar">
+      <button class="chip on" type="button" data-f="all">Todas</button>
+      <button class="chip" type="button" data-f="next">Por sonar</button>
+      <button class="chip" type="button" data-f="liked">Me gusta</button>
+      <button class="chip mode" type="button" id="voteMode" aria-pressed="false" title="Cambia el orden en que suenan, no lo que se ve">🔥 Más votadas suenan primero</button>
+      <button class="chip" type="button" data-f="done">Ya sonaron</button>
+    </div>
+
+    <div class="thead" id="list-anchor"><span style="text-align:center">#</span><span>Canción</span><span>La puso</span><span></span><span style="text-align:right">⏱</span><span></span></div>
+    <div class="list" id="list"></div>
+    <div class="empty" id="empty"><b>La cola está vacía</b>Pega el primer link de YouTube y abre la sesión 🎧</div>
+  </main>
+
+  <!-- ============ NOW PLAYING ============ -->
+  <aside class="box np" id="np">
+    <div class="in">
+      <div class="head"><p class="lbl">Ahora suena</p><button class="iconbtn" id="npClose" type="button" aria-label="Ocultar panel"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+      <div class="stage" id="stage">
+        <span class="ring"></span>
+        <div class="pv" id="pv0"><div id="yt0"></div></div>
+        <div class="pv off" id="pv1"><div id="yt1"></div></div>
+        <div class="idle" id="idle"><div><b>Muzi está en silencio</b>Agrega canciones y presiona play.</div></div>
+      </div>
+      <div><p class="title" id="npT">—</p><p class="by" id="npB">Nadie ha puesto música todavía</p></div>
+      <div class="xf">
+        <div class="top"><span>DECK A</span><span>CROSSFADER</span><span>DECK B</span></div>
+        <div class="track"><span class="knob" id="knob"></span></div>
+      </div>
+      <div class="room" id="room">
+        <div class="room-off" id="roomOff">
+          <b>Sala en vivo</b><span>Los alumnos piden, votan y reaccionan desde su celular.</span>
+          <button class="btn-spec w100 mag" type="button" id="btnRoom">📡 Abrir la sala</button>
+        </div>
+        <div class="room-on" id="roomOn" hidden>
+          <div class="room-top"><span class="ping"></span><span class="lbl">Sala abierta</span><button class="room-x" type="button" id="roomClose">Cerrar</button></div>
+          <p class="room-code" id="roomCode">----</p>
+          <p class="room-people"><b id="roomN">0</b> <span id="roomNtx">personas conectadas</span></p>
+          <div class="room-faces" id="roomFaces"></div>
+          <p class="room-mode" id="roomMode"></p>
+        </div>
+      </div>
+      <div class="upnext"><p class="lbl" style="margin-bottom:6px">Sigue en la cola</p><div id="upnext"></div></div>
+      <div class="qrcard"><div id="qr" aria-label="Código QR para pedir canción"></div><div><b id="qrT">Escanea y pide tu canción</b><span id="qrS">Te abre WhatsApp con el mensaje listo. Pega tu link de YouTube y envíalo.</span></div></div>
+      <a class="wa" id="waLink" href="#" target="_blank" rel="noopener">
+        <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.1-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.9s.7-2.1 1-2.4c.3-.3.6-.3.8-.3h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.4.6-.4.4c-.1.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1c.2-.3.4-.2.6-.1l2 .9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg></span>
+        <span><b>¿Estás desde el celular?</b><span>Mándale tu canción al profe por WhatsApp</span></span>
+      </a>
+    </div>
+  </aside>
+
+  <!-- ============ PLAYER ============ -->
+  <footer class="player" id="player">
+    <div class="pl-l">
+      <img id="bThumb" alt="" src="data:image/gif;base64,R0lGODlhAQABAAAAACw=">
+      <div class="tx"><span class="t" id="bT">Elige una canción</span><p class="w" id="bW">Muzi</p></div>
+      <button class="heart" id="bLike" type="button" aria-label="Me gusta"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.7 4.5c2 0 3.4 1.1 4.3 2.4.9-1.3 2.3-2.4 4.3-2.4 3.7 0 5.8 3.9 4.3 7.3C19.5 16.4 12 21 12 21z"/></svg></button>
+    </div>
+    <div class="pl-c">
+      <div class="ctr">
+        <button class="iconbtn" id="shufB" type="button" aria-label="Aleatorio" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg></button>
+        <button class="iconbtn" id="prev" type="button" aria-label="Anterior"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+        <button class="pp" id="pp" type="button" aria-label="Reproducir"><svg viewBox="0 0 24 24" id="ppIco"><path d="M8 5v14l11-7z"/></svg></button>
+        <button class="iconbtn" id="next" type="button" aria-label="Siguiente (mezclar)"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+        <button class="iconbtn" id="rep" type="button" aria-label="Repetir la lista" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 013-3h15M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 01-3 3H3"/></svg></button>
+      </div>
+      <div class="prog"><span id="tCur">0:00</span><div class="rng" id="seek" role="slider" aria-label="Avance" tabindex="0"><span class="wv" id="wv0"></span><span class="wv fill" id="wv1"></span><i></i></div><span id="tDur">0:00</span></div>
+    </div>
+    <div class="pl-r">
+      <span>MEZCLA</span><div class="rng" id="mixR" role="slider" aria-label="Duración de la mezcla" tabindex="0" style="--v:53%"><i></i></div><span class="mixv" id="mixV">8 s</span>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 5L6 9H2v6h4l5 4z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a10 10 0 010 14"/></svg>
+      <div class="rng" id="volR" role="slider" aria-label="Volumen" tabindex="0" style="--v:85%"><i></i></div>
+      <button class="iconbtn timer" id="timerBtn" type="button" aria-label="Temporizador de clase" title="Temporizador: apaga la música sola"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6"/></svg><span class="badge" id="timerBadge"></span></button>
+      <button class="iconbtn" id="projBtn" type="button" aria-label="Modo proyector" title="Modo proyector (P)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+      <button class="iconbtn" id="npToggle" type="button" aria-label="Mostrar u ocultar Ahora suena"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M14 4v16"/></svg></button>
+    </div>
+  </footer>
+  <div class="proj-ov" id="projOv" aria-hidden="true">
+    <div class="bgimg" id="pjBg"></div><div class="shade"></div><div class="pulse"></div>
+    <div class="logo"><span class="mz-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="mz-word big">Muzi</span></div>
+    <button class="iconbtn x" id="projX" type="button" aria-label="Salir del modo proyector"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    <div class="info">
+      <p class="lbl">Ahora suena en Muzi</p>
+      <h2 id="pjT">—</h2>
+      <p class="who" id="pjW"></p>
+      <div class="bar"><i id="pjBar"></i></div>
+      <div class="nx" id="pjNx"></div>
+    </div>
+    <div class="pjfeed" id="pjFeed" aria-live="polite"></div>
+    <div class="qrbox"><div id="qr2"></div><div><b id="qr2T">¿Quieres poner tu canción?</b><span id="qr2S">Escanea y mándala por WhatsApp</span><span class="pjcode" id="pjCode" hidden></span></div></div>
+  </div>
+  <div class="reacts" id="reacts" aria-hidden="true"></div>
+  <nav class="mtabs" aria-label="Vista"><button class="on" type="button" data-v="list">La cola</button><button type="button" data-v="np">Ahora suena</button></nav>
+</div>
+<noscript><p style="padding:24px">Muzi necesita JavaScript para sonar.</p></noscript>
+</body>
+</html>
